@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Cadastrando um novo Evento {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="title">Evento</label>
+        <input type="text" name="title"
+               placeholder="Nome do Evento" class="form-control"
+               value="{{ request.form['title'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="links">Endereço Eletrônico</label>
+        <input type="text" name="links"
+               placeholder="Digite aqui o endereço eletônico (link) do evento." class="form-control"
+               value="{{ request.form['links'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="details">Detalhes</label>
+        <textarea name="details" placeholder="Detalhes do evento"
+                  class="form-control">{{ request.form['details'] }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="date1">Data Avaliação nº 1</label>
+        <input type="date" name="date1"
+               class="form-control"
+               value="{{ request.form['date1'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="evaluation1">Avaliação nº 1</label>
+        <input type="integer" name="evaluation1"
+               placeholder="pts" class="form-control"
+               value="{{ request.form['evaluation1'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="date2">Data avaliação nº 2</label>
+        <input type="date" name="date2"
+               class="form-control"
+               value="{{ request.form['date2'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="evaluation2">Avaliação nº 2</label>
+        <input type="integer" name="evaluation2"
+               placeholder="pts" class="form-control"
+               value="{{ request.form['evaluation2'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="date3">Data avaliação nº 3</label>
+        <input type="date" name="date3"
+               class="form-control"
+               value="{{ request.form['date3'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="evaluation3">Avaliação nº 3</label>
+        <input type="integer" name="evaluation3"
+               placeholder="pts" class="form-control"
+               value="{{ request.form['evaluation3'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="date4">Data avaliação nº 4</label>
+        <input type="date" name="date4"
+               class="form-control"
+               value="{{ request.form['date4'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="evaluation4">Avaliação nº 4</label>
+        <input type="integer" name="evaluation4"
+               placeholder="pts" class="form-control"
+               value="{{ request.form['evaluation4'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="date5">Data avaliação nº 5</label>
+        <input type="date" name="date5"
+               class="form-control"
+               value="{{ request.form['date5'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="evaluation5">Avaliação nº 5</label>
+        <input type="integer" name="evaluation5"
+               placeholder="pts" class="form-control"
+               value="{{ request.form['evaluation5'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="date6">Data avaliação nº 6</label>
+        <input type="date" name="date6"
+               class="form-control"
+               value="{{ request.form['date6'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="evaluation6">Avaliação nº 6</label>
+        <input type="integer" name="evaluation6"
+               placeholder="pts" class="form-control"
+               value="{{ request.form['evaluation6'] }}"></input>
+    </div>
+    
+    <div class="form-group">
+        <label for="clipping">Inserido no Clipping? </label>
+        <input type="text" name="clipping"
+               placeholder="Sim ou Não ?" class="form-control"
+               value="{{ request.form['clipping'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="cme">Evento apresentado ao CME (Comitê para Monitoramento de Eventos) ?</label>
+        <input type="text" name="cme"
+               placeholder="Sim ou Não ?" class="form-control"
+               value="{{ request.form['cme'] }}"></input>
+    </div>
+
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Gravar</button>
+    </div>
+</form>
+{% endblock %}
