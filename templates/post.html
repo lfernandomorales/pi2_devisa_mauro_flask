@@ -6,6 +6,46 @@
     <span class="badge badge-primary">{{ cdays }} dias</span>
     <span class="badge badge-primary">Atualizado em {{ post['updated'] }}</span>
     <span class="badge badge-primary">{{ udays }} dias</span>
-    <p>{{ post['links'] }}</p>
+    <br><a href="{{ post['links']}}">{{ post['links'] }}</a>
     <p>{{ post['details'] }}</p>
+    <p>Status do Evento: {{ post['status_evento'] }}</p>
+    {% if post['clipping']%}
+    <p>Apresentado no clipping?: Sim</p>
+    {% else %}
+    <p>Apresentado no clipping?: Não</p>
+    {% endif %}
+
+    {% if post['cme']%}
+    <p>Apresentado ao CME?: Sim</p>
+    {% else %}
+    <p>Apresentado ao CME?: Não</p>
+    {% endif %}
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Data da avaliação</th>
+                    <th>Probabilidade</th>
+                    <th>Impacto na saúde humana</th>
+                    <th>Impacto na assistencia</th>
+                    <th>Impacto social</th>
+                    <th>Impacto na capacidade de resposta</th>
+                    <th>Avaliação de risco</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for n in avaliacao %}
+                <tr>
+                    <td>{{ n['data_da_avaliacao'] }}</td>
+                    <td>{{ n['probabilidade'] }}</td>
+                    <td>{{ n['impacto_saude_humana'] }}</td>
+                    <td>{{ n['impacto_na_assistencia'] }}</td>
+                    <td>{{ n['impacto_social'] }}</td>
+                    <td>{{ n['impacto_na_capacidade_de_resposta'] }}</td>
+                    <td>{{ n['avaliacao_de_risco'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

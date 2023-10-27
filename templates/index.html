@@ -3,20 +3,49 @@
 {% block content %}
     <h1>{% block title %} Vigilância Baseada em Eventos {% endblock %}</h1>
     <h5>Filtros: 
-        <a href="{{ url_for('index_desc')}}"><span class="badge badge-secondary">Decrescente</span> </a> 
-        <a href="{{ url_for('index_60')}}"><span class="badge badge-secondary">Até 60 dias</span> </a> 
+        {% if ordered == '' %}
+        <a href="{{ url_for('index', ordered='desc')}}"><span class="badge badge-secondary">Decrescente</span> </a> 
+        <a href="{{ url_for('index', ordered='60')}}"><span class="badge badge-secondary">Até 60 dias</span> </a> 
+        {% elif ordered == '60' %}
+        <a href="{{ url_for('index')}}"><span class="badge badge-secondary">Crescente</span></a>
+        <a href="{{ url_for('index', ordered='desc')}}"><span class="badge badge-secondary">Decrescente</span></a>
+        {% else %}
+        <a href="{{ url_for('index')}}"><span class="badge badge-secondary">Crescente</span></a>
+        <a href="{{ url_for('index', ordered='60')}}"><span class="badge badge-secondary">Até 60 dias</span></a>
+        {% endif %}
+
     </h5> 
         {% for post in posts %}
+        
+        {% if post['ultima_avaliacao_risco'] == 'Alto' or post['ultima_avaliacao_risco'] == 'Muito Alto' %}    
+        <img src="../static/img/red_alert.png" class="img-alert">    
+        {% elif post['ultima_avaliacao_risco'] == 'Moderado' %}
+        <img src="../static/img/yellow_alert.png" class="img-alert">    
+        {% else %}
+        <img src="../static/img/green_alert.png" class="img-alert">
+        {% endif %}    
+    
+        
+        <!--<img src="../static/img/green_alert.png" class="img-alert">-->
         <a href="{{ url_for('post', post_id=post['id']) }}">
             <h2>{{ post['title'] }}</h2>
         </a>
         <span class="badge badge-primary">Criado em {{ post['created'] }}</span>
         <span class="badge badge-primary">Atualizado em {{ post['updated'] }}</span>
         {% if g.user %}
+            <form action="{{ url_for('delete', id=post['id']) }}" method="post" class="btn-post">
+                <input type="submit" value="Excluir"
+                        class="btn btn-danger btn-sm"
+                        onclick="return confirm('Deseja realmente excluir o Evento ?')">
+            </form>
             <a href="{{ url_for('edit', id=post['id']) }}">
-                <span class="badge badge-warning">Editar</span>
+                <span class="btn btn-warning btn-sm btn-post">Editar</span>
+            </a>
+            <a href="{{ url_for('avaliate', id=post['id']) }}">
+                <span class="btn btn-primary btn-sm btn-post">Inserir Avaliação</span>
             </a>
         {% endif %}
         <hr>
         {% endfor %}
+
 {% endblock %}

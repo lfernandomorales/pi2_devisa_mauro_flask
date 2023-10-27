@@ -1,6 +1,28 @@
-h1 {
+/*h1 {
     border: 2px #eee solid;
     color: brown;
     text-align: center;
     padding: 10px;
+}*/
+.img-navbar {
+    height: 60%;
+    width: 60%;
+}
+
+.btn-logout {
+    height: 5%;
+    width: 5%;
+    float: right;
+}
+
+.img-alert {
+    height: 2%;
+    width: 2%;
+    float: left;
+    margin: 10px;
+}
+
+.btn-post {
+    float: right;
+    margin: 2px;
 }

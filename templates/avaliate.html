@@ -1,38 +1,294 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% block title %} Inserir avaliação de envento {% endblock %}</h1>
+<h1>{% block title %} Inserir avaliação de evento {% endblock %}</h1>
 
 <form method="post">
     <div class="form-group">
         <label for="id_label">id</label>
-        <input type="text" name="id2"
+        <input type="text" name="id"
                class="form-control"
-               value="{{ request.form['id2'] or post  }}"
+               value="{{ request.form['id'] or post  }}"
                readonly></input>
     </div>
 
     <div class="form-group">
-        <label for="avaliacao1_label">Avaliação 1</label></br>
-        <input type="radio" name="avaliacao1" id ='av1op1' value=0> 0 </input>
-        <input type="radio" name="avaliacao1" id ='av1op2' value=1> 1 </input>
-        <input type="radio" name="avaliacao1" id ='av1op3' value=2> 2 </input>
+        <label for="avaliacao1_label">Apresenta risco de disseminação nacional ou internacional?</label></br>
+        <input type="radio" name="avaliacao1" id ='avaliacao1op1' value=0 onblur="calcularProbabilidade()"> 0 </input>
+        <input type="radio" name="avaliacao1" id ='avaliacao1op2' value=1 onblur="calcularProbabilidade()"> 1 </input>
+        <input type="radio" name="avaliacao1" id ='avaliacao1op3' value=2 onblur="calcularProbabilidade()"> 2 </input>
     </div>
 
     <div class="form-group">
-        <label for="avaliacao2_label">Avaliação 2</label></br>
-        <input type="radio" name="avaliacao2" id ='av2op1' value=0> 0 </input>
-        <input type="radio" name="avaliacao2" id ='av2op2' value=1> 1 </input>
-        <input type="radio" name="avaliacao2" id ='av2op3' value=2> 2 </input>
+        <label for="avaliacao2_label">Evento em alerta internacional ou ESPII, em alerta no marco do RSI, em iminente ingresso ou já ingressou no país?</label></br>
+        <input type="radio" name="avaliacao2" id ='avaliacao2op1' value=0 onblur="calcularProbabilidade()"> 0 </input>
+        <input type="radio" name="avaliacao2" id ='avaliacao2op2' value=1 onblur="calcularProbabilidade()"> 1 </input>
+        <input type="radio" name="avaliacao2" id ='avaliacao2op3' value=2 onblur="calcularProbabilidade()"> 2 </input>
     </div>
 
     <div class="form-group">
-        <label for="avaliacao3_label">Avaliação 3</label></br>
-        <input type="radio" name="avaliacao3" id ='av3op1' value=0> 0 </input>
-        <input type="radio" name="avaliacao3" id ='av3op2' value=1> 1 </input>
-        <input type="radio" name="avaliacao3" id ='av3op3' value=2> 2 </input>
+        <label for="avaliacao3_label">Trata-se de evento inesperado ou desconhecido?</label></br>
+        <input type="radio" name="avaliacao3" id ='avaliacao3op1' value=0 onblur="calcularProbabilidade()"> 0 </input>
+        <input type="radio" name="avaliacao3" id ='avaliacao3op2' value=1 onblur="calcularProbabilidade()"> 1 </input>
+        <input type="radio" name="avaliacao3" id ='avaliacao3op3' value=2 onblur="calcularProbabilidade()"> 2 </input>
     </div>
 
+
+    <div class="form-group">
+        <label for="avaliacao4_label">Representa a reintrodução da doença erradicada/eliminada?</label></br>
+        <input type="radio" name="avaliacao4" id ='avaliacao4op1' value=0 onblur="calcularProbabilidade()"> 0 </input>
+        <input type="radio" name="avaliacao4" id ='avaliacao4op2' value=1 onblur="calcularProbabilidade()"> 1 </input>
+        <input type="radio" name="avaliacao4" id ='avaliacao4op3' value=2 onblur="calcularProbabilidade()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao5_label">A localidade não tem capacidade de manejo do evento?</label></br>
+        <input type="radio" name="avaliacao5" id ='avaliacao5op1' value=0 onblur="calcularProbabilidade()"> 0 </input>
+        <input type="radio" name="avaliacao5" id ='avaliacao5op2' value=1 onblur="calcularProbabilidade()"> 1 </input>
+        <input type="radio" name="avaliacao5" id ='avaliacao5op3' value=2 onblur="calcularProbabilidade()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao6_label">O evento está disseminando em várias regiões do mundo ou país?</label></br>
+        <input type="radio" name="avaliacao6" id ='avaliacao6op1' value=0 onblur="calcularImpactoSaudeHumana()"> 0 </input>
+        <input type="radio" name="avaliacao6" id ='avaliacao6op2' value=1 onblur="calcularImpactoSaudeHumana()"> 1 </input>
+        <input type="radio" name="avaliacao6" id ='avaliacao6op3' value=2 onblur="calcularImpactoSaudeHumana()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao7_label">O evento está notificado em mais de uma região do país, estado ou município?</label></br>
+        <input type="radio" name="avaliacao7" id ='avaliacao7op1' value=0 onblur="calcularImpactoSaudeHumana()"> 0 </input>
+        <input type="radio" name="avaliacao7" id ='avaliacao7op2' value=1 onblur="calcularImpactoSaudeHumana()"> 1 </input>
+        <input type="radio" name="avaliacao7" id ='avaliacao7op3' value=2 onblur="calcularImpactoSaudeHumana()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao8_label">O evento tem sido notificado em mais de uma instituição (hospital, escola etc.)?</label></br>
+        <input type="radio" name="avaliacao8" id ='avaliacao8op1' value=0 onblur="calcularImpactoSaudeHumana()"> 0 </input>
+        <input type="radio" name="avaliacao8" id ='avaliacao8op2' value=1 onblur="calcularImpactoSaudeHumana()"> 1 </input>
+        <input type="radio" name="avaliacao8" id ='avaliacao8op3' value=2 onblur="calcularImpactoSaudeHumana()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao9_label">O evento está envolvido em suspeita ou confirmação de surto?</label></br>
+        <input type="radio" name="avaliacao9" id ='avaliacao9op1' value=0 onblur="calcularImpactoSaudeHumana()"> 0 </input>
+        <input type="radio" name="avaliacao9" id ='avaliacao9op2' value=1 onblur="calcularImpactoSaudeHumana()"> 1 </input>
+        <input type="radio" name="avaliacao9" id ='avaliacao9op3' value=2 onblur="calcularImpactoSaudeHumana()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao10_label">Trata-se de uma doença, agravo ou eventos de saúde pública com alterações do perfil clínico epidemiológico ou em zona de alerta?</label></br>
+        <input type="radio" name="avaliacao10" id ='avaliacao10op1' value=0 onblur="calcularImpactoSaudeHumana()"> 0 </input>
+        <input type="radio" name="avaliacao10" id ='avaliacao10op2' value=1 onblur="calcularImpactoSaudeHumana()"> 1 </input>
+        <input type="radio" name="avaliacao10" id ='avaliacao10op3' value=2 onblur="calcularImpactoSaudeHumana()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao11_label">Trata-se de um evento de saúde pública com óbitos acima do esperado?</label></br>
+        <input type="radio" name="avaliacao11" id ='avaliacao11op1' value=0 onblur="calcularImpactoSaudeHumana()"> 0 </input>
+        <input type="radio" name="avaliacao11" id ='avaliacao11op2' value=1 onblur="calcularImpactoSaudeHumana()"> 1 </input>
+        <input type="radio" name="avaliacao11" id ='avaliacao11op3' value=2 onblur="calcularImpactoSaudeHumana()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao12_label">Evento de alta patogenicidade, virulência e transmissibilidade?</label></br>
+        <input type="radio" name="avaliacao12" id ='avaliacao12op1' value=0 onblur="calcularImpactoSaudeHumana()"> 0 </input>
+        <input type="radio" name="avaliacao12" id ='avaliacao12op2' value=1 onblur="calcularImpactoSaudeHumana()"> 1 </input>
+        <input type="radio" name="avaliacao12" id ='avaliacao12op3' value=2 onblur="calcularImpactoSaudeHumana()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao13_label">O evento afeta populações vulneráveis?</label></br>
+        <input type="radio" name="avaliacao13" id ='avaliacao13op1' value=0 onblur="calcularImpactoSaudeHumana()"> 0 </input>
+        <input type="radio" name="avaliacao13" id ='avaliacao13op2' value=1 onblur="calcularImpactoSaudeHumana()"> 1 </input>
+        <input type="radio" name="avaliacao13" id ='avaliacao13op3' value=2 onblur="calcularImpactoSaudeHumana()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao14_label">Apresenta aspectos que demonstram aumento nos níveis de atendimentos ou hospitalizações?</label></br>
+        <input type="radio" name="avaliacao14" id ='avaliacao14op1' value=0 onblur="calcularImpactoAssistencia()"> 0 </input>
+        <input type="radio" name="avaliacao14" id ='avaliacao14op2' value=1 onblur="calcularImpactoAssistencia()"> 1 </input>
+        <input type="radio" name="avaliacao14" id ='avaliacao14op3' value=2 onblur="calcularImpactoAssistencia()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao15_label">Evento envolve grave comprometimento assistencial? Não existem tratamentos específicos ou requer uso de medicamentos controlados?</label></br>
+        <input type="radio" name="avaliacao15" id ='avaliacao15op1' value=0 onblur="calcularImpactoAssistencia()"> 0 </input>
+        <input type="radio" name="avaliacao15" id ='avaliacao15op2' value=1 onblur="calcularImpactoAssistencia()"> 1 </input>
+        <input type="radio" name="avaliacao15" id ='avaliacao15op3' value=2 onblur="calcularImpactoAssistencia()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao16_label">O evento afeta profissionais da saúde?</label></br>
+        <input type="radio" name="avaliacao16" id ='avaliacao16op1' value=0 onblur="calcularImpactoAssistencia()"> 0 </input>
+        <input type="radio" name="avaliacao16" id ='avaliacao16op2' value=1 onblur="calcularImpactoAssistencia()"> 1 </input>
+        <input type="radio" name="avaliacao16" id ='avaliacao16op3' value=2 onblur="calcularImpactoAssistencia()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao17_label">Trata-se de doença, agravo ou evento de saúde pública com alta relevância social?</label></br>
+        <input type="radio" name="avaliacao17" id ='avaliacao17op1' value=0 onblur="calcularImpactoSocial()"> 0 </input>
+        <input type="radio" name="avaliacao17" id ='avaliacao17op2' value=1 onblur="calcularImpactoSocial()"> 1 </input>
+        <input type="radio" name="avaliacao17" id ='avaliacao17op3' value=2 onblur="calcularImpactoSocial()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao18_label">O evento afeta localmente o turismo ou tem alta influência econômica?</label></br>
+        <input type="radio" name="avaliacao18" id ='avaliacao18op1' value=0 onblur="calcularImpactoSocial()"> 0 </input>
+        <input type="radio" name="avaliacao18" id ='avaliacao18op2' value=1 onblur="calcularImpactoSocial()"> 1 </input>
+        <input type="radio" name="avaliacao18" id ='avaliacao18op3' value=2 onblur="calcularImpactoSocial()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao19_label">O evento afeta a convivência social?</label></br>
+        <input type="radio" name="avaliacao19" id ='avaliacao19op1' value=0 onblur="calcularImpactoSocial()"> 0 </input>
+        <input type="radio" name="avaliacao19" id ='avaliacao19op2' value=1 onblur="calcularImpactoSocial()"> 1 </input>
+        <input type="radio" name="avaliacao19" id ='avaliacao19op3' value=2 onblur="calcularImpactoSocial()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao20_label">Existem atrasos nas notificações ou análises de dados ou silêncio epidemiológico?</label></br>
+        <input type="radio" name="avaliacao20" id ='avaliacao20op1' value=0 onblur="calcularImpactoCapacidadeDeResposta()"> 0 </input>
+        <input type="radio" name="avaliacao20" id ='avaliacao20op2' value=1 onblur="calcularImpactoCapacidadeDeResposta()"> 1 </input>
+        <input type="radio" name="avaliacao20" id ='avaliacao20op3' value=2 onblur="calcularImpactoCapacidadeDeResposta()"> 2 </input>
+    </div>
+
+    <div class="form-group">
+        <label for="avaliacao21_label">Existem sobrecarga na equipe de vigilância ou não tem equipe de pronta resposta?</label></br>
+        <input type="radio" name="avaliacao21" id ='avaliacao21op1' value=0 onblur="calcularImpactoCapacidadeDeResposta()"> 0 </input>
+        <input type="radio" name="avaliacao21" id ='avaliacao21op2' value=1 onblur="calcularImpactoCapacidadeDeResposta()"> 1 </input>
+        <input type="radio" name="avaliacao21" id ='avaliacao21op3' value=2 onblur="calcularImpactoCapacidadeDeResposta()"> 2 </input>
+    </div>
+    <script type="text/javascript">
+        function calcularProbabilidade(){
+            try {
+                valor1 = parseInt(document.querySelector('input[name=avaliacao1]:checked').value);
+                var valor2 = parseInt(document.querySelector('input[name=avaliacao2]:checked').value);
+                var valor3 = parseInt(document.querySelector('input[name=avaliacao3]:checked').value);
+                var valor4 = parseInt(document.querySelector('input[name=avaliacao4]:checked').value);
+                var valor5 = parseInt(document.querySelector('input[name=avaliacao5]:checked').value);
+                document.getElementById('probabilidade').value = valor1 + valor2 + valor3 + valor4 + valor5;   
+                calcularRisco();
+            } catch {
+                
+            }
+        }
+        function calcularImpactoSaudeHumana(){
+            try {
+                var valor1 = parseInt(document.querySelector('input[name=avaliacao6]:checked').value);
+                var valor2 = parseInt(document.querySelector('input[name=avaliacao7]:checked').value);
+                var valor3 = parseInt(document.querySelector('input[name=avaliacao8]:checked').value);
+                var valor4 = parseInt(document.querySelector('input[name=avaliacao9]:checked').value);
+                var valor5 = parseInt(document.querySelector('input[name=avaliacao10]:checked').value);
+                var valor6 = parseInt(document.querySelector('input[name=avaliacao11]:checked').value);
+                var valor7 = parseInt(document.querySelector('input[name=avaliacao12]:checked').value);
+                var valor8 = parseInt(document.querySelector('input[name=avaliacao13]:checked').value);
+                document.getElementById('impacto_saude_humana').value = valor1 + valor2 + valor3 + valor4 + valor5 + valor6 + valor7 + valor8;   
+                calcularRisco();
+            } catch {}
+        }
+        function calcularImpactoAssistencia(){
+            try{
+                var valor1 = parseInt(document.querySelector('input[name=avaliacao14]:checked').value);
+                var valor2 = parseInt(document.querySelector('input[name=avaliacao15]:checked').value);
+                var valor3 = parseInt(document.querySelector('input[name=avaliacao16]:checked').value);
+                document.getElementById('impacto_assistencia').value = valor1 + valor2 + valor3;   
+                calcularRisco();
+            } catch {}
+        }
+        function calcularImpactoSocial(){
+            try {
+                var valor1 = parseInt(document.querySelector('input[name=avaliacao17]:checked').value);
+                var valor2 = parseInt(document.querySelector('input[name=avaliacao18]:checked').value);
+                var valor3 = parseInt(document.querySelector('input[name=avaliacao19]:checked').value);
+                document.getElementById('impacto_social').value = valor1 + valor2 + valor3;   
+                calcularRisco();
+            } catch{}
+        }
+        function calcularImpactoCapacidadeDeResposta(){
+            try{
+            var valor1 = parseInt(document.querySelector('input[name=avaliacao20]:checked').value);
+            var valor2 = parseInt(document.querySelector('input[name=avaliacao21]:checked').value);
+            document.getElementById('impacto_capacidade_resposta').value = valor1 + valor2;  
+            calcularRisco();
+            } catch{}
+        }
+
+        function calcularRisco(){
+            try{
+                probabilidade = parseInt(document.getElementById('probabilidade').value)
+                impacto = parseInt(document.getElementById('impacto_saude_humana').value) + parseInt(document.getElementById('impacto_assistencia').value) + parseInt(document.getElementById('impacto_social').value) + parseInt(document.getElementById('impacto_capacidade_resposta').value) 
+                if (probabilidade<=3){
+                    if(impacto<=5){
+                        risco = 'Minimo'
+                    } else if (impacto<=19){
+                        risco = 'Baixo'
+                    } else {
+                        risco = 'Alto'
+                    }
+                } else if ( probabilidade<=5){
+                    if(impacto<=5){
+                        risco = 'Baixo'
+                    } else if (impacto <=10){
+                        risco = 'Moderado'
+                    } else if (impacto<=25) {
+                        risco = 'Alto'
+                    } else {
+                        risco = 'Muito Alto'
+                    }
+                } else{
+                    if(impacto<=5){
+                        risco = 'Baixo'
+                    } else if (impacto<=10){
+                        risco = 'Moderado'
+                    } else if (impacto<=19){
+                        risco = 'Alto'
+                    } else {
+                        risco = 'Muito Alto'
+                    }
+                }
+                document.getElementById('risco').value = risco;   
+            } catch{}
+        }
+
+
+    </script>
+    <div class="form-group">
+        <label for="probabilidade_label">Probabilidade</label>
+        <input type="text" name="probabilidade" id="probabilidade"
+               class="form-control"
+               readonly></input>
+    </div>
+    <div class="form-group">
+        <label for="impacto_saude_label">Impacto na saúde humana</label>
+        <input type="text" name="impacto_saude_humana" id="impacto_saude_humana"
+               class="form-control"
+               readonly></input>
+    </div>
+    <div class="form-group">
+        <label for="impacto_assistencia_label">Impacto na assistencia</label>
+        <input type="text" name="impacto_assistencia" id="impacto_assistencia"
+               class="form-control"
+               readonly></input>
+    </div>
+    <div class="form-group">
+        <label for="impacto_social_label">Impacto social</label>
+        <input type="text" name="impacto_social" id="impacto_social"
+               class="form-control"
+               readonly></input>
+    </div>
+    <div class="form-group">
+        <label for="impacto_capacidade_resposta_label">Impacto na capacidade de resposta</label>
+        <input type="text" name="impacto_capacidade_resposta" id="impacto_capacidade_resposta"
+               class="form-control"
+               readonly></input>
+    </div>
+    <div class="form-group">
+        <label for="risco_label">Risco</label>
+        <input type="text" name="risco" id="risco"
+               class="form-control"
+               readonly></input>
+    </div>
     
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Gravar</button>

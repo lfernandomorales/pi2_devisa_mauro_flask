@@ -10,11 +10,13 @@ CREATE TABLE posts (
   details TEXT NOT NULL,
   status_evento VARCHAR NOT NULL, 
   clipping BOOLEAN,
-  cme BOOLEAN
+  cme BOOLEAN,
   data_insercao_no_clipping DATE, 
-	ultima_data_no_clipping DATE, 
+  ultima_data_no_clipping DATE, 
   data_inicio_monitoramento_no_cme DATE, 
-	data_encerramento_do_monitaramento DATE 
+  data_encerramento_do_monitaramento DATE, 
+  ultima_avaliacao_risco VARCHAR,
+  compartilhamento_da_informacao BOOLEAN 
 );
 
 CREATE TABLE avaliacoes (
@@ -48,10 +50,9 @@ CREATE TABLE avaliacoes (
 	impacto_social INTEGER, 
 	impacto_na_capacidade_de_resposta INTEGER, 
 	avaliacao_de_risco VARCHAR, 
-	compartilhamento_da_informacao BOOLEAN, 
 	PRIMARY KEY (id, data_da_avaliacao), 
 	FOREIGN KEY(id) REFERENCES posts (id)
-)
+);
 
 /*
  DROP TABLE IF EXISTS user;
