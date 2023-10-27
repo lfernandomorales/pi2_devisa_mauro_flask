@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Vigilância Baseada em Eventos {% endblock %}</h1>
-    <h5>Filtros: 
+    <h1 id="h1-index">{% block title %} Vigilância Baseada em Eventos {% endblock %}</h1>
+    <h5 id="h5-index">Filtros: 
         {% if ordered == '' %}
         <a href="{{ url_for('index', ordered='desc')}}"><span class="badge badge-secondary">Decrescente</span> </a> 
         <a href="{{ url_for('index', ordered='60')}}"><span class="badge badge-secondary">Até 60 dias</span> </a> 

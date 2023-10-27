@@ -42,8 +42,6 @@ def index():
         posts = conn.execute('SELECT * FROM posts').fetchall()
         ordered = ''
     conn.close()
-   # posts = conn.execute('SELECT * FROM posts').fetchall()
-    #conn.close()
     return render_template('index.html', posts = posts, ordered = ordered)
 
 @app.route('/avaliate/<int:id>', methods=('GET', 'POST'))
@@ -185,6 +183,7 @@ def delete(id):
     post = get_post(id)
     conn = get_db_connection()
     conn.execute('DELETE FROM posts WHERE id = ?', (id,))
+    conn.execute('DELETE FROM avaliacoes WHERE id = ?', (id,))
     conn.commit()
     conn.close()
     flash('"{}" foi excluído do cadastro!'.format(post['title']))

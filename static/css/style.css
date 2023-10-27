@@ -26,3 +26,35 @@
     float: right;
     margin: 2px;
 }
+.btn-login{
+    margin: auto;
+    margin-top: 30px;
+    display: block;
+}
+.img-login{
+    width: 200px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: block;
+    text-align: center;
+}
+.login-container{
+    width: 350px;
+    height: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+
+}
+#h5-index{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#h1-index{
+    margin-top: 20px;
+}
